@@ -58,7 +58,7 @@ function NavTool(config) {
 	}
 
 	function addClassName(num) {
-		// console.log(num);
+		
 		$target.eq(num).addClass(style).siblings().removeClass(style);
 	}
 }

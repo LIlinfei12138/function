@@ -1,12 +1,12 @@
 // 参数说明:
-			// outBox,包裹所有内容最大的盒子
-			// insideBox, 包裹li的盒子
-			// li,就是li标签
-			// buttonLeft,左按钮
-			// buttonRight,右按钮
-			// [circle,circleStyleName], 最小面的小圆圈,可写可不写
-			// intervalTime,多少时间换一次
-			// finishTime:多长时间完成动画
+// outBox,包裹所有内容最大的盒子
+// insideBox, 包裹li的盒子
+// li,就是li标签
+// buttonLeft,左按钮
+// buttonRight,右按钮
+// [circle,circleStyleName], 最小面的小圆圈,可写可不写
+// intervalTime,多少时间换一次
+// finishTime:多长时间完成动画
 var move = {
 	chuantong: function(config) {
 
@@ -14,13 +14,13 @@ var move = {
 
 		// 获取外面大盒子
 		var $outBox = $(config.outBox);
-
+		$outBox.css("overflow", "hidden");
 		// 获取里面盒子,也就是动的盒子
 		var $insideBox = $(config.insideBox);
 
 		// 获取li
 		var $li = $(config.li);
-
+		$li.css("float", "left");
 		// 小圆圈
 		if (config.circle && config.circleStyleName) {
 
@@ -158,15 +158,23 @@ var move = {
 
 		// 获取外面大盒子
 		var $outBox = $(config.outBox);
-
+		$outBox.css({
+			"overflow": "hidden",
+			"position": "relative"
+		});
 		// 获取里面盒子,也就是动的盒子
 		var $insideBox = $(config.insideBox);
 
 		// 获取li
 		var $li = $(config.li);
-
+		$li.css({
+			"position": "absolute",
+			"left":"0px",
+			"top":"0px",
+			"opacity":"0"
+		});
 		// 小圆圈
-
+		$li.eq(0).css("opacity","1");
 		if (config.circle && config.circleStyleName) {
 
 			//小圆圈样式
