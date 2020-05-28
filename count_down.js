@@ -1,18 +1,17 @@
-// eg
-			// var config ={
-			// 	"Year":2020,
-			// 	"Month":5,
-			// 	"Day":28,
-			// 	"Hour":16,
-			// 	"Minute":14
+			// eg
+			// var config = {
+			// 	"Year": 2020,
+			// 	"Month": 5,
+			// 	"Day": 28,
+			// 	"Hour": 22,
+			// 	"Minute": 10
 			// }
-			// countDown(config);
 			function countDown(config) {
-				tarYear = config.Year;
-				tarMonth = config.Month - 1;
-				tarDay = config.Day;
-				tarHour = config.Hour;
-				tarMinute = config.Minute;
+				var targetYear = config.Year;
+				var targetMonth = config.Month-1;
+				var targetDay = config.Day;
+				var targetHour = config.Hour;
+				var targetMinute = config.Minute;
 				// 获取天数对应部分
 				var dayTag = document.getElementsByClassName("Day")[0];
 				// 获取小时对应部分
@@ -22,45 +21,30 @@
 				// 获取秒对应部分
 				var secondTag = document.getElementsByClassName("Second")[0];
 				// 目标时间的毫秒数
-				var targetDate = new Date(tarYear, tarMonth, tarDay, tarHour, tarMinute);
+				var targetDate = new Date(targetYear, targetMonth, targetDay, targetHour, targetMinute).getTime();
 				getResult();
+				// var a1 = new Date(targetYear, targetMonth, targetDay, targetHour, targetMinute);
+				// console.log(a1);
 				var timer = setInterval(getResult, 1000);
-
-				function getResult() {
-					// 现在时间的毫秒数
+				function getResult(){
 					var nowDate = new Date().getTime();
-					// 相差多少毫秒数
+					
 					var differ = targetDate - nowDate;
-
-					// 一共秒
-					var seconds = parseInt(differ / 1000);
-					// 一共分钟
-					var minutes = parseInt(seconds / 60);
-					// 一共小时
-					var hours = parseInt(minutes / 60);
-					// 还有多少天
-					var Days = parseInt(hours / 24);
-
-					// 还有多少小时
-					var surplusHours = Days * 24 - hours;
-					var countHours = surplusHours < 0 ? -(surplusHours) : surplusHours;
-					// 还有多少分钟
-					var surplusMinutes = hours * 60 - minutes;
-					var countMinutes = surplusMinutes < 0 ? -(surplusMinutes) : surplusMinutes;
-					// 还有多少秒
-					var surplusSeconds = minutes * 60 - seconds;
-					var countSeconds = surplusSeconds < 0 ? -(surplusSeconds) : surplusSeconds;
-					// DOM操作
-					secondTag.innerText = addZero(countSeconds);
-					minuteTag.innerText = addZero(countMinutes);
-					hourTag.innerText = addZero(countHours);
-					dayTag.innerText = addZero(Days);
-					if (seconds == 0) {
-						clearInterval(timer);
-						console.log("计时完成");
-					}
-				}
-
+					// 秒数
+					var seconds = Math.floor(differ / 1000)%60;
+					// 分钟数
+					var minutes = Math.floor(differ / 1000 / 60)%60;
+					// 小时数
+					var hours = Math.floor(differ / 1000 / 60 / 60)%24;
+					// 天数
+					var days = Math.floor(differ / 1000 / 60 / 60 / 24);
+					// 添加DOM
+					secondTag.innerText = addZero(seconds);
+					minuteTag.innerText = addZero(minutes);
+					hourTag.innerText = addZero(hours);
+					dayTag.innerText = addZero(days);
+					
+				};
 				function addZero(num) {
 					return num < 10 ? "0" + num : num
 				}
